@@ -1,5 +1,6 @@
 #include "HTT-utilities/LepEffInterface/interface/ScaleFactor.h"
 
+namespace htt_utilities {
 
 void ScaleFactor::init_ScaleFactor(TString inputRootFile){
 
@@ -53,12 +54,11 @@ void ScaleFactor::init_ScaleFactor(TString inputRootFile, std::string HistoBaseN
 
 
 void ScaleFactor::SetAxisBins(TGraphAsymmErrors* graph) {
-
-	int NPOINTS = graph->GetN(); 
-	double AXISBINS [NPOINTS+1] = {};
-	for (int i=0; i<NPOINTS; i++) { AXISBINS[i] = (graph->GetX()[i] - graph->GetErrorXlow(i)); }
+    const size_t NPOINTS = graph->GetN();
+    std::vector<double> AXISBINS(NPOINTS+1);
+    for (size_t i=0; i<NPOINTS; i++) { AXISBINS[i] = (graph->GetX()[i] - graph->GetErrorXlow(i)); }
 	AXISBINS[NPOINTS] = (graph->GetX()[NPOINTS-1] + graph->GetErrorXhigh(NPOINTS-1));
-	graph->GetXaxis()->Set(NPOINTS, AXISBINS);
+    graph->GetXaxis()->Set(NPOINTS, AXISBINS.data());
 	return;
 }
 
@@ -211,6 +211,8 @@ double ScaleFactor::get_ScaleFactorError(double pt, double eta){
 	SF_error = pow(SF_error, 0.5)*(effData/effMC);
 	}
 	return SF_error;
+}
+
 }
 	
 

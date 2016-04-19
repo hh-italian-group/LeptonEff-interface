@@ -11,7 +11,7 @@
 #include <string>
 
 
-
+namespace htt_utilities {
 
 class ScaleFactor {
 
@@ -27,10 +27,10 @@ class ScaleFactor {
         int FindPtBin( std::map<std::string, TGraphAsymmErrors *>, std::string, double);
 
 	public:
-		ScaleFactor(){}; 
+        ScaleFactor(){}
 		void init_ScaleFactor(TString);
 		void init_ScaleFactor(TString,std::string);
-		~ ScaleFactor(){};
+        ~ ScaleFactor(){}
 		double get_EfficiencyData(double, double); //pt, eta
 		double get_EfficiencyMC(double, double);
 		double get_ScaleFactor(double, double); 
@@ -40,6 +40,7 @@ class ScaleFactor {
 
 };
 
+}
 
 #endif
 
