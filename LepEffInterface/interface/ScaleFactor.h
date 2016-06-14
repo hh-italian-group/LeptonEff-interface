@@ -23,8 +23,8 @@ class ScaleFactor {
 
 	void  SetAxisBins(TGraphAsymmErrors*);
 	bool  check_SameBinning(TGraphAsymmErrors*, TGraphAsymmErrors*);
-	std::string FindEtaLabel(double);
-        int FindPtBin( std::map<std::string, TGraphAsymmErrors *>, std::string, double);
+	std::string FindEtaLabel(double, std::string);
+    int FindPtBin( std::map<std::string, TGraphAsymmErrors *>, std::string, double);
 
 	public:
 		ScaleFactor(){}; 
