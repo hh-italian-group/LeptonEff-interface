@@ -145,8 +145,8 @@ double ScaleFactor::get_EfficiencyData(double pt, double eta){
 	if (ptbin == -99){eff =1;} // if pt is underflow 
 	else eff = eff_data[label]->GetY()[ptbin-1];
 
-	if (eff > 1.) {std::cout<< "WARNING in ScaleFactor::get_EfficiencyData(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc: Returned efficiency in data > 1. " << std::endl;} 
-	if (eff < 0 ) {std::cout<<"WARNING in ScaleFactor::get_EfficiencyData(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc: Returned negative efficiency in data" <<std::endl;}
+	if (eff > 1.) {std::cout<< "WARNING in ScaleFactor::get_EfficiencyData(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc: Efficiency in data > 1. Set eff = 1." << std::endl; eff=1;} 
+	if (eff < 0 ) {std::cout<<"WARNING in ScaleFactor::get_EfficiencyData(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc: Negative efficiency in data. Set eff = 0." <<std::endl; eff=0;}
 
 	return eff;
 	
@@ -162,8 +162,8 @@ double ScaleFactor::get_EfficiencyMC(double pt, double eta) {
 	if (ptbin == -99){eff =1;} // if pt is underflow 
 	else eff= eff_mc[label]->GetY()[ptbin-1];
 
-	if (eff > 1. ) {std::cout << "WARNING in ScaleFactor::get_EfficiencyMC(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc : Returned efficiency in MC > 1. " << std::endl;} 		
-	if (eff < 0 ) {std::cout<<"WARNING in ScaleFactor::get_EfficiencyMC(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc : Returned negative efficiency in MC. " <<std::endl;}
+	if (eff > 1. ) {std::cout << "WARNING in ScaleFactor::get_EfficiencyMC(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc : Efficiency in MC > 1. Set eff = 1." << std::endl; eff =1;} 		
+	if (eff < 0 ) {std::cout<<"WARNING in ScaleFactor::get_EfficiencyMC(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc : Negative efficiency in MC. Set eff = 0." <<std::endl; eff =0;}
 
 	return eff;
 
