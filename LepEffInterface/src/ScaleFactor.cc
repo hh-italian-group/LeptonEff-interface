@@ -1,4 +1,5 @@
 #include "HTT-utilities/LepEffInterface/interface/ScaleFactor.h"
+#include <sstream>
 
 namespace htt_utilities {
 
@@ -104,15 +105,21 @@ std::string ScaleFactor::FindEtaLabel(double Eta, std::string Which){
 
 	if (Which == "data"){
 		it =  eff_data.find(EtaLabel);
-		if ( it == eff_data.end()) { 
-		std::cout << "ERROR in ScaleFactor::get_EfficiencyData(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc : no object corresponding to eta label "<< EtaLabel << " for data " << std::endl; exit(1);
+        if ( it == eff_data.end()) {
+            std::ostringstream ss;
+            ss << "in LepEffInterface ScaleFactor::get_EfficiencyData: no object corresponding to eta = " << Eta
+               << " for data.";
+            throw std::runtime_error(ss.str());
 		}
 	}
 
 	else if (Which == "mc"){
 		it = eff_mc.find(EtaLabel);
 		if (it == eff_mc.end()) { 
-		std::cout << "ERROR in ScaleFactor::get_EfficiencyData(double pt, double eta) from LepEffInterface/src/ScaleFactor.cc : no object corresponding to eta label "<< EtaLabel << " for MC " << std::endl; exit(1);
+            std::ostringstream ss;
+            ss << "in LepEffInterface ScaleFactor::get_EfficiencyData: no object corresponding to eta = " << Eta
+               << " for mc.";
+            throw std::runtime_error(ss.str());
 		}		
 	}
 	
